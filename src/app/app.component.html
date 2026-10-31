@@ -1,0 +1,41 @@
+<main class="overflow-x-clip bg-[#0C0C0C]">
+<section id="home" class="relative flex h-screen min-h-[600px] flex-col overflow-x-clip bg-[#0C0C0C] px-6 md:px-10">
+ <nav class="fade-in flex justify-between pt-6 md:pt-8 text-[#D7E2EA]" style="--dy:-20px">
+  <a *ngFor="let link of [{name:'About',href:'#about'},{name:'Price',href:'#services'},{name:'Projects',href:'#projects'},{name:'Contact',href:'#contact'}]" [href]="link.href" class="text-sm md:text-lg lg:text-[1.4rem] font-medium uppercase tracking-wider transition-opacity duration-200 hover:opacity-70">{{link.name}}</a>
+ </nav>
+ <div class="fade-in mt-6 sm:mt-4 md:-mt-5 overflow-hidden" style="--delay:.15s;--dy:40px"><h1 class="hero-heading w-full whitespace-nowrap text-center text-[14vw] sm:text-[15vw] md:text-[16vw] lg:text-[17.5vw] font-black uppercase tracking-tight leading-none">Hi, i'm jack</h1></div>
+ <div class="pointer-events-none absolute z-10 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 sm:top-auto sm:bottom-0 sm:translate-y-0">
+  <div class="fade-in pointer-events-auto" style="--delay:.6s;--dy:30px"><div class="magnet" (mousemove)="onPortraitMove($event)" (mouseleave)="resetPortrait()" [style.transform]="'translate3d('+portraitX+'px,'+portraitY+'px,0)'" [style.transition]="portraitActive ? 'transform .3s ease-out' : 'transform .6s ease-in-out'"><img [src]="portrait" alt="Jack 3D creator portrait" class="w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px]" /></div></div>
+ </div>
+ <div class="mt-auto flex items-end justify-between gap-4 pb-7 sm:pb-8 md:pb-10 relative z-20">
+  <p class="fade-in max-w-[160px] sm:max-w-[220px] md:max-w-[260px] text-[#D7E2EA] font-light uppercase tracking-wide leading-snug" style="--delay:.35s;font-size:clamp(.75rem,1.4vw,1.5rem)">a 3d creator driven by crafting striking and unforgettable projects</p>
+  <a class="fade-in contact-button inline-flex items-center gap-2 rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base font-medium uppercase tracking-widest text-white hover:brightness-125 transition" style="--delay:.5s" href="mailto:hello@jackportfolio.example?subject=Project%20inquiry">Contact Me ↗</a>
+ </div>
+</section>
+<section #marquee class="overflow-hidden bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10"><div class="flex flex-col gap-3">
+ <div class="marquee-track" [style.transform]="'translate3d('+(offset-200)+'px,0,0)'"><ng-container *ngFor="let repeat of [0,1,2]"><img *ngFor="let gif of gifs.slice(0,11); let i=index" class="marquee-tile" [src]="gif" [alt]="'3D creative showcase '+(i+1)" loading="lazy" /></ng-container></div>
+ <div class="marquee-track" [style.transform]="'translate3d('+(-offset-4000)+'px,0,0)'"><ng-container *ngFor="let repeat of [0,1,2]"><img *ngFor="let gif of gifs.slice(11); let i=index" class="marquee-tile" [src]="gif" [alt]="'3D creative showcase '+(i+12)" loading="lazy" /></ng-container></div>
+ </div></section>
+<section id="about" class="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0C0C0C] px-5 sm:px-8 md:px-10 py-20">
+ <div *ngFor="let decoration of decorations; let i=index" class="fade-in absolute" [ngClass]="decoration.className" [style.--dx]="i<2 ? '-80px' : '80px'" [style.--delay]="(i+1)*.1+'s'"><img [src]="decoration.src" alt="" class="w-full" loading="lazy" /></div>
+ <div class="relative z-10 flex flex-col items-center gap-10 sm:gap-14 md:gap-16">
+  <h2 class="fade-in hero-heading text-center font-black uppercase leading-none tracking-tight" style="font-size:clamp(3rem,12vw,160px)">About me</h2>
+  <p class="animated-paragraph max-w-[560px] text-center text-[#D7E2EA] font-medium leading-relaxed" [attr.aria-label]="aboutText" style="font-size:clamp(1rem,2vw,1.35rem)"><span *ngFor="let letter of aboutLetters; let i=index" aria-hidden="true" [style.opacity]="getLetterOpacity(i)">{{letter === ' ' ? ' ' : letter}}</span></p>
+  <div class="pt-6 sm:pt-8 md:pt-12"><a href="mailto:hello@jackportfolio.example?subject=Project%20inquiry" class="contact-button inline-flex items-center gap-2 rounded-full px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base font-medium uppercase tracking-widest text-white">Contact Me ↗</a></div>
+ </div>
+</section>
+<section id="services" class="relative rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] bg-white px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32">
+ <h2 class="fade-in mb-16 sm:mb-20 md:mb-28 text-center font-black uppercase leading-none tracking-tight text-[#0C0C0C]" style="font-size:clamp(3rem,12vw,160px)">Services</h2>
+ <div class="mx-auto max-w-5xl"><div *ngFor="let service of services; let i=index" class="fade-in flex gap-6 sm:gap-12 items-start border-b border-black/15 py-8 sm:py-10 md:py-12" [style.--delay]="i*.1+'s'"><span class="min-w-[2ch] font-black leading-none" style="font-size:clamp(3rem,10vw,140px)">{{(i+1).toString().padStart(2,'0')}}</span><div class="pt-1 sm:pt-4"><h3 class="mb-3 font-medium uppercase" style="font-size:clamp(1rem,2.2vw,2.1rem)">{{service.name}}</h3><p class="max-w-2xl font-light leading-relaxed opacity-60" style="font-size:clamp(.85rem,1.6vw,1.25rem)">{{service.description}}</p></div></div></div>
+</section>
+<section id="projects" class="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] bg-[#0C0C0C] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32">
+ <h2 class="fade-in hero-heading mb-20 text-center font-black uppercase leading-none tracking-tight" style="font-size:clamp(3rem,12vw,160px)">Project</h2>
+ <div *ngFor="let project of projects; let i=index" class="project-container relative h-[85vh] min-h-[600px]">
+  <article class="sticky mx-auto max-w-6xl rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8 text-[#D7E2EA]" [style.top]="'calc(6rem + ' + (i * 28) + 'px)'" [style.transform]="'scale(' + (projectScales[i] || 1) + ')'">
+   <div class="mb-5 flex flex-wrap items-center justify-between gap-4"><span class="font-black leading-none" style="font-size:clamp(3rem,8vw,110px)">{{(i+1).toString().padStart(2,'0')}}</span><div class="flex-1 min-w-[140px]"><span class="text-xs sm:text-sm uppercase opacity-60 tracking-widest">{{project.category}}</span><h3 class="text-xl sm:text-3xl md:text-5xl font-semibold uppercase leading-tight">{{project.name}}</h3></div><a href="#contact" class="rounded-full border-2 border-[#D7E2EA] px-5 sm:px-8 py-3 text-xs sm:text-sm uppercase tracking-widest hover:bg-[#D7E2EA]/10">Live Project</a></div>
+   <div class="grid grid-cols-[40%_1fr] gap-3"><div class="grid gap-3"><img class="w-full object-cover rounded-[24px] sm:rounded-[40px] md:rounded-[60px]" style="height:clamp(130px,16vw,230px)" [src]="project.images[0]" [alt]="project.name+' visual 1'" loading="lazy" /><img class="w-full object-cover rounded-[24px] sm:rounded-[40px] md:rounded-[60px]" style="height:clamp(160px,22vw,340px)" [src]="project.images[1]" [alt]="project.name+' visual 2'" loading="lazy" /></div><img class="h-full w-full object-cover rounded-[24px] sm:rounded-[40px] md:rounded-[60px]" [src]="project.images[2]" [alt]="project.name+' visual 3'" loading="lazy" /></div>
+  </article>
+ </div>
+</section>
+<footer id="contact" class="px-6 py-20 text-center text-[#D7E2EA]"><h2 class="hero-heading text-5xl sm:text-7xl font-black uppercase mb-8">Let's create.</h2><a href="mailto:hello@jackportfolio.example?subject=Project%20inquiry" class="contact-button inline-flex rounded-full px-8 py-3 text-sm font-medium uppercase tracking-widest text-white">Contact Me ↗</a><p class="mt-12 text-sm opacity-50">© {{year}} Jack — 3D Creator</p></footer>
+</main>
